@@ -1,0 +1,42 @@
+create database escola;
+use escola;
+
+create table alunos (
+ID INT AUTO_INCREMENT PRIMARY KEY,
+Nome VARCHAR(255) NOT NULL,
+DataNascimento DATE,
+Genero CHAR,
+Endereco VARCHAR(255),
+Contato VARCHAR(255)
+);
+
+insert into alunos(ID, Nome, DataNascimento, Genero, Endereco, Contato)
+value ('0','Leonardo', '2003-03-29','M','Rua aleatoria 179', '40028922');
+
+select *from alunos;
+
+drop table alunos;
+
+create table professores (
+ID_PROFESSOR INT AUTO_INCREMENT PRIMARY KEY,
+Nome VARCHAR(255) NOT NULL,
+DataNascimento DATE,
+Genero CHAR,
+Endereco VARCHAR(255),
+Contato VARCHAR(255)
+);
+
+insert into professores(ID_PROFESSOR, Nome, DataNascimento, Genero, Endereco, Contato)
+value ('0','Victor', '2000-9-1','M','Rua aleatoria 180', '40028922');
+
+select *from professores;
+
+drop table professores;
+
+CREATE TABLE Turmas (
+ID_Turma INT AUTO_INCREMENT PRIMARY KEY,
+NomeTurma VARCHAR(255) NOT NULL,
+AnoLetivo INT,
+ProfessorResponsavel INT,
+FOREIGN KEY (ProfessorResponsavel) REFERENCES professores (ID_PROFESSOR)
+);
