@@ -11,9 +11,20 @@ Contato VARCHAR(255)
 );
 
 insert into alunos(ID, Nome, DataNascimento, Genero, Endereco, Contato)
-value ('0','Leonardo', '2003-03-29','M','Rua aleatoria 179', '40028922');
+value ('0','Leonardo', '2003-03-29','M','Rua aleatoria 179', '40028922'),
+('0','Gabriel', '2003-10-31','M','Rua dos bois', '47707070'),
+('0', 'Paula', '2000-07-04','F','Botuvera','012346789');
 
-select *from alunos;
+insert into alunos(ID, Nome, DataNascimento, Genero, Endereco, Contato)
+value ('0','Felipe', '1950-10-02','M','Rua Secundino Veiga', '9544-3076');
+
+insert into alunos(ID, Nome, DataNascimento, Genero, Endereco, Contato)
+value('0','Ana','1999-07-28','F','Rua 7','5547912345678'),
+('0','Bruno','2002-08-12','M','Rua 8','5547912345679'),
+('0','Camila','2001-05-01','F','Rua 9','5547912345680');
+
+select *from alunos order by DataNascimento;
+delete from alunos where id = 11;
 
 drop table alunos;
 
@@ -25,6 +36,8 @@ Genero CHAR,
 Endereco VARCHAR(255),
 Contato VARCHAR(255)
 );
+
+
 
 insert into professores(ID_PROFESSOR, Nome, DataNascimento, Genero, Endereco, Contato)
 value ('0','Victor', '2000-9-1','M','Rua aleatoria 180', '40028922');
@@ -39,4 +52,42 @@ NomeTurma VARCHAR(255) NOT NULL,
 AnoLetivo INT,
 ProfessorResponsavel INT,
 FOREIGN KEY (ProfessorResponsavel) REFERENCES professores (ID_PROFESSOR)
+);
+
+CREATE TABLE Disciplinas(
+IDDisciplina int auto_increment primary key,
+NomeDisciplina varchar(255) not null
+);
+
+CREATE TABLE Notas(
+IDNota int auto_increment primary key,
+IDAluno int,
+IDDisciplina int,
+Nota decimal(5, 2),
+foreign key (IDAluno) references Alunos (ID),
+foreign key (IDDisciplina) references Disciplinas (IDDisciplina)
+);
+
+CREATE TABLE Frequencia(
+IDFrequencia int auto_increment primary key,
+IDAluno int,
+IDDisciplina int,
+Dia date,
+Presenca boolean,
+foreign key (IDAluno) references Alunos (ID),
+foreign key (IDDisciplina) references Disciplinas (IDDisciplina)
+);
+
+CREATE TABLE EventosEscolares(
+IDEvento int auto_increment primary key,
+NomeEvento varchar(255) not null,
+DataEvento date,
+Descricao text,
+Endereco varchar(255)
+);
+
+CREATE TABLE Usuarios(
+IDUsuario int auto_increment primary key,
+NomeUsuario varchar(50) not null,
+Senha varchar(255)not null
 );
